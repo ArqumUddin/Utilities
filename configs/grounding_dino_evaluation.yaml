@@ -1,0 +1,43 @@
+# Grounding DINO Base Configuration
+# Model: https://huggingface.co/IDEA-Research/grounding-dino-base
+# Grounding DINO is a zero-shot object detection model that detects objects based on text prompts
+
+model:
+  name: "IDEA-Research/grounding-dino-base"
+  display_name: "Grounding DINO Base"
+  confidence_threshold: 0.25 
+  device: "cuda"
+
+  text_prompts:
+    - "coffee bag"
+    - "coffee mug"
+    - "map"
+    - "backpack"
+    - "hiking boots"
+    - "sneakers"
+    - "hiking pole"
+    - "water bottle"
+    - "sunscreen bottle"
+    - "sun hat"
+    - "headlamp"
+    - "reading glasses"
+    - "barbers pole"
+    - "dirty boots"
+    - "plate of brownies"
+
+input:
+  path: "/home/ubuntu/Workspace/test-data/sim_teleop_vids_concatenated/concatenated.mp4"
+  type: "video"
+  frame_sampling_rate: 1  # Process every Nth frame (1 = all frames)
+
+output:
+  directory: "results/grounding_dino_base_sim"
+  save_annotated_frames: true
+  annotated_frames_dir: "annotated_frames"
+  generate_video: true
+  results_filename: "grounding_dino_results.json"
+
+visualization:
+  bbox_color_default: [255, 140, 0]
+  bbox_thickness: 2
+  font_scale: 0.6

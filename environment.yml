@@ -1,0 +1,79 @@
+name: utilities
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip>=25.0
+
+  # CUDA support
+  - pytorch::pytorch-cuda=12.1
+  - nvidia::cuda-cudart=12.1.105
+  - nvidia::cuda-libraries=12.1.0
+  - nvidia::cuda-nvrtc=12.1.105
+  - nvidia::cuda-nvtx=12.1.105
+  - nvidia::cuda-runtime=12.1.0
+
+  # Build tools
+  - gcc=12.4.0
+  - gxx=12.4.0
+
+  # Additional packages via pip
+  - pip:
+    # Core ML/CV (PyTorch ecosystem)
+    - torch==2.9.0
+    - torchvision==0.24.0
+    - torchaudio==2.9.0
+    - numpy==1.26.4
+    - transformers==4.57.1
+    - tokenizers==0.22.1
+    - safetensors==0.6.2
+    - huggingface-hub==0.36.0
+
+    # YOLO and detection
+    - ultralytics==8.3.221
+    - ultralytics-thop==2.0.17
+    - supervision==0.19.0
+
+    # Computer Vision
+    - opencv-python==4.9.0.80
+    - pillow==12.0.0
+
+    # Data processing
+    - pandas==2.3.3
+    - polars==1.34.0
+    - pycocotools==2.0.10
+
+    # Scientific computing
+    - scikit-learn==1.7.2
+    - scipy==1.15.3
+
+    # Visualization
+    - matplotlib==3.10.7
+    - seaborn==0.13.2
+    - plotly==6.3.1
+    - kaleido==1.1.0
+
+    # Video processing
+    - ffmpeg-python==0.2.0
+
+    # Image upscaling
+    - diffusers==0.31.0  # Stable Diffusion upscaling
+    - accelerate==1.2.1  # Required by diffusers
+    - realesrgan==0.3.0  # Real-ESRGAN upscaling
+
+    # Vision-Language Models
+    - git+https://github.com/facebookresearch/dinov3.git  # DINOv3 and DINOtxt
+
+    # Web/API
+    - flask==3.1.2
+    - requests==2.28.2
+
+    # Utilities
+    - pyyaml==6.0.3
+    - tqdm==4.65.2
+    - click==8.3.0
+    - rich==13.4.2
+    - termcolor==3.2.0

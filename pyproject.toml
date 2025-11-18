@@ -1,0 +1,97 @@
+[build-system]
+requires = ["setuptools>=65.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "utilities"
+version = "0.1.0"
+description = "A comprehensive library for object detection and computer vision tasks"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {text = "MIT"}
+authors = [
+    {name = "Arqum Uddin"}
+]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Recognition",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.8",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+]
+
+# Core dependencies (minimal - for data loading and basic bbox operations)
+dependencies = [
+    "numpy>=1.24.0",
+    "opencv-python>=4.8.0",
+    "pillow>=10.0.0",
+    "pyyaml>=6.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+# Model inference - HuggingFace Transformers
+models-hf = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "transformers>=4.30.0",
+    "huggingface_hub>=0.20.0",
+]
+
+# Model inference - YOLO models
+models-yolo = [
+    "torch>=2.0.0",
+    "ultralytics>=8.0.0",
+]
+
+# Model inference - Grounding DINO
+models-gdino = [
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "transformers>=4.30.0",
+]
+
+# Advanced metrics calculation
+metrics = [
+    "scikit-learn>=1.3.0",
+]
+
+# Visualization and plotting
+visualization = [
+    "plotly>=5.18.0",
+    "kaleido>=0.2.1",
+]
+
+# Video processing
+video = [
+    "ffmpeg-python>=0.2.0",
+]
+
+# REST API server
+server = [
+    "flask>=2.3.0",
+    "requests>=2.28.0",
+]
+
+# All dependencies
+all = [
+    "utilities[models-hf,models-yolo,models-gdino,metrics,visualization,video,server]",
+]
+
+[project.scripts]
+vision-eval = "scripts.evaluate:main"
+
+[project.urls]
+Repository = "https://github.com/ArqumUddin/Utilities"
+"Bug Tracker" = "https://github.com/ArqumUddin/Utilities/issues"
+
+[tool.setuptools]
+packages = ["vision_utils", "scripts"]
+
+[tool.setuptools.package-data]
+vision_utils = ["py.typed"]

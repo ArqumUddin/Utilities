@@ -1,0 +1,23 @@
+model:
+  name: "PekingU/rtdetr_v2_r50vd"
+  display_name: "RTDETR R50 V2"
+  confidence_threshold: 0.6
+  device: "cuda" 
+
+input:
+  path: "/home/ubuntu/Workspace/test-data/episode_76_rgb.mp4"  
+  type: "video"
+  frame_sampling_rate: 1
+
+output:
+  directory: "results/rtdetr_r50vd_dataset_76" 
+  save_annotated_frames: true
+  annotated_frames_dir: "annotated_frames"
+  generate_video: true 
+  results_filename: "rtdetr_results.json"
+
+visualization:
+  bbox_color_default: [0, 0, 255]
+  bbox_thickness: 2 
+  font_scale: 0.6
+

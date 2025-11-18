@@ -1,0 +1,37 @@
+# Advanced Configuration (with ground truth)
+# This configuration includes ground truth annotations for accuracy evaluation
+
+# Model Configuration
+model:
+  name: "facebook/detr-resnet-50"  # HuggingFace model identifier
+  # revision: "main"  # Optional: specific model revision
+  confidence_threshold: 0.7  # Minimum confidence score for detections
+  device: "cuda"  # Device for inference: "cuda" or "cpu"
+
+# Input Configuration
+input:
+  path: "/path/to/image_dataset"  # Path to video file or image directory
+  type: "images"  # "video" or "images"
+  frame_sampling_rate: 1  # Process every Nth frame (1 = process all frames)
+
+# Ground Truth Configuration
+ground_truth:
+  path: "/path/to/annotations.json"  # Path to ground truth annotations
+  format: "coco"  # Annotation format: "coco", "yolo", or "custom"
+  iou_threshold: 0.5  # IoU threshold for matching predictions to ground truth
+
+# Output Configuration
+output:
+  directory: "results/advanced_evaluation"  # Output directory for results
+  save_annotated_frames: true  # Save frames with bounding box annotations
+  annotated_frames_dir: "annotated_frames"  # Subdirectory for annotated frames
+  generate_video: false  # Generate annotated video (only for video inputs)
+  results_filename: "results.json"  # Name of JSON results file
+
+# Visualization Configuration (optional)
+visualization:
+  bbox_color_correct: [0, 255, 0]  # Color for correct predictions (BGR) - green
+  bbox_color_incorrect: [255, 0, 0]  # Color for incorrect predictions (BGR) - red
+  bbox_color_default: [0, 255, 255]  # Color when no ground truth (BGR) - cyan
+  bbox_thickness: 2  # Bounding box line thickness
+  font_scale: 0.5  # Font scale for class labels
