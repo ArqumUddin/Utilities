@@ -20,9 +20,23 @@ A comprehensive Python library for computer vision tasks including object detect
 
 ## Installation
 
-### Complete Installation (Recommended)
+### Quick Installation (Automated)
 
-Follow these steps to install vision_utils with all dependencies:
+Run the installation script to automatically set up everything:
+
+```bash
+cd path/to/Utilities
+./install.sh
+```
+
+This script will:
+1. Create the conda environment from environment.yml
+2. Clone and install BasicSR
+3. Install vision_utils in development mode
+
+### Manual Installation
+
+Alternatively, follow these steps to install vision_utils manually:
 
 #### Step 1: Create Conda Environment
 
@@ -58,14 +72,6 @@ pip install -e .
 ```
 
 Now you're ready to use all vision_utils features including object detection, classification, and segmentation!
-
-### Alternative: Pip Installation (Basic Features Only)
-
-For basic features without DINOtxt support:
-
-```bash
-pip install utilities
-```
 
 ## Quick Start
 
