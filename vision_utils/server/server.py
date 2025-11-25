@@ -119,10 +119,14 @@ class VisionServer:
         if "confidence_threshold" in payload:
             self.model.confidence_threshold = original_confidence
 
+        if isinstance(results, tuple):
+            results = results[0]
+
         if not results:
             result = {
-                "results": [],
-                "model_name": self.model_name
+                "detections": [],
+                "model_name": self.model_name,
+                "warning": f"Empty results: {type(results)}"
             }
         elif isinstance(results[0], Detection):
             frame_detections = FrameDetections(
@@ -150,7 +154,7 @@ class VisionServer:
             result["model_name"] = self.model_name
         else:
             result = {
-                "results": [str(r) for r in results],
+                "detections": [str(r) for r in results],
                 "model_name": self.model_name,
                 "warning": f"Unknown result type: {type(results[0])}"
             }
