@@ -67,7 +67,6 @@ dependencies:
       - accelerate==1.2.1
       - addict==2.4.0
       - antlr4-python3-runtime==4.9.3
-      - basicsr==1.4.2
       - blinker==1.9.0
       - certifi==2025.11.12
       - charset-normalizer==3.4.4
@@ -78,7 +77,6 @@ dependencies:
       - cycler==0.12.1
       - defusedxml==0.7.1
       - diffusers==0.31.0
-      - dinov3==0.0.1
       - facexlib==0.3.0
       - ffmpeg-python==0.2.0
       - filelock==3.20.0
@@ -185,7 +183,6 @@ dependencies:
       - ultralytics==8.3.221
       - ultralytics-thop==2.0.17
       - urllib3==1.26.20
-      - utilities==0.2.0
       - wcwidth==0.2.14
       - werkzeug==3.1.3
       - yapf==0.43.0

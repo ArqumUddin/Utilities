@@ -31,7 +31,7 @@ from .metrics.gpu_memory import GPUMemoryTracker
 from .visualization.annotator import FrameAnnotator
 from .visualization.video_writer import AnnotatedVideoWriter
 from .visualization.plotter import ResultsPlotter
-from .io.config import EvaluationConfig
+from .io.config import EvaluationConfig, ServerConfig
 from .io.results import ResultsWriter
 from .evaluation.evaluator import ObjectDetectionEvaluator
 from .evaluation.classification_evaluator import ClassificationEvaluator
@@ -92,6 +92,7 @@ __all__ = [
     "AnnotatedVideoWriter",
     "ResultsPlotter",
     "EvaluationConfig",
+    "ServerConfig",
     "ResultsWriter",
     "ObjectDetectionEvaluator",
     "ClassificationEvaluator",

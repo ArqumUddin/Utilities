@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 
 from vision_utils import VisionServer, host_model
-from vision_utils.io.config import EvaluationConfig
+from vision_utils.io.config import ServerConfig
 
 def main():
     parser = argparse.ArgumentParser(description="Serve vision_utils models via REST API")
@@ -25,7 +25,7 @@ def main():
 
     # Load from config or use CLI args
     if args.config:
-        config = EvaluationConfig(args.config)
+        config = ServerConfig(args.config)
         model_name = config.model_name
         confidence = args.confidence if args.confidence is not None else config.confidence_threshold
         device = args.device if args.device is not None else config.device

@@ -1,11 +1,112 @@
 """
-Configuration parser and validator for object detection evaluation.
+Configuration parser and validator for object detection evaluation and model serving.
 """
 import os
 import torch
 import yaml
 from typing import Dict, Any, Optional
 from pathlib import Path
+
+class ServerConfig:
+    """
+    Configuration class for model server.
+    Parses and validates YAML configuration files for serving models via API.
+    Only validates model-related fields, not input/output paths.
+    """
+    def __init__(self, config_path: str):
+        """
+        Initialize configuration from YAML file.
+
+        Args:
+            config_path: Path to YAML configuration file
+        """
+        self.config_path = config_path
+        self.config = self._load_config()
+        self._validate_config()
+
+    def _load_config(self) -> Dict[str, Any]:
+        """Load YAML configuration file."""
+        if not os.path.exists(self.config_path):
+            raise FileNotFoundError(f"Configuration file not found: {self.config_path}")
+
+        with open(self.config_path, 'r') as f:
+            config = yaml.safe_load(f)
+
+        if config is None:
+            raise ValueError(f"Empty configuration file: {self.config_path}")
+
+        return config
+
+    def _validate_config(self):
+        """Validate required configuration parameters for server."""
+        if 'model' not in self.config:
+            raise ValueError("Missing required configuration field: model")
+
+        if 'name' not in self.config.get('model', {}):
+            raise ValueError("Model configuration must include 'name'")
+
+    @property
+    def model_name(self) -> str:
+        """Get model name/identifier."""
+        return self.config.get('model', {}).get('name')
+
+    @property
+    def display_name(self) -> Optional[str]:
+        """Get display name for the model (optional)."""
+        return self.config.get('model', {}).get('display_name', None)
+
+    @property
+    def model_revision(self) -> Optional[str]:
+        """Get model revision (optional)."""
+        return self.config.get('model', {}).get('revision', None)
+
+    @property
+    def confidence_threshold(self) -> float:
+        """Get confidence threshold for detections."""
+        return self.config.get('model', {}).get('confidence_threshold', 0.5)
+
+    @property
+    def device(self) -> str:
+        """Get device for model inference (cpu/cuda)."""
+        return self.config.get('model', {}).get('device', 'cuda' if self._is_cuda_available() else 'cpu')
+
+    @property
+    def text_prompts(self) -> Optional[list]:
+        """Get text prompts list for zero-shot models (YOLO-World, Grounding DINO)."""
+        return self.config.get('model', {}).get('text_prompts', None)
+
+    @property
+    def config_file(self) -> Optional[str]:
+        """Get config file path for models like YOLO-World."""
+        return self.config.get('model', {}).get('config_file', None)
+
+    @property
+    def checkpoint(self) -> Optional[str]:
+        """Get checkpoint path for models like YOLO-World."""
+        return self.config.get('model', {}).get('checkpoint', None)
+
+    @property
+    def max_detections(self) -> int:
+        """Get maximum detections for models like YOLO-World."""
+        return self.config.get('model', {}).get('max_detections', 100)
+
+    @property
+    def nms_threshold(self) -> float:
+        """Get NMS threshold for models like YOLO-World."""
+        return self.config.get('model', {}).get('nms_threshold', 0.5)
+
+    @staticmethod
+    def _is_cuda_available() -> bool:
+        """Check if CUDA is available."""
+        try:
+            return torch.cuda.is_available()
+        except ImportError:
+            return False
+
+    def __repr__(self) -> str:
+        """String representation of configuration."""
+        return f"ServerConfig(model={self.model_name}, device={self.device})"
+
 
 class EvaluationConfig:
     """
