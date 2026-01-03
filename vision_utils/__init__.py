@@ -60,6 +60,8 @@ from .image_processing.stable_diffusion_upscale import (
 from .image_processing.esrgan_upscale import (
     upscale_image_esrgan,
 )
+from .ycb.downloader import YCBDownloader
+from .ycb.point_cloud_generator import YCBPointCloudGenerator
 
 __all__ = [
     "__version__",
@@ -118,4 +120,6 @@ __all__ = [
     "project_world_object_to_image",
     "upscale_image_stable_diffusion",
     "upscale_image_esrgan",
+    "YCBDownloader",
+    "YCBPointCloudGenerator",
 ]
